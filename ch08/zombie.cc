@@ -18,7 +18,7 @@ int main()
         }
 
         //子进程B的子进程C继续
-        sleep(2);
+        sleep(10);
         printf("second child, parent pid = %d\n", getppid());
         exit(0);
     }
