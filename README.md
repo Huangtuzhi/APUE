@@ -7,7 +7,7 @@ Study of Advanced Programming in the Unix Environment
 
 + Down the src code from [APUE](http://www.apuebook.com/)
 + Init a dir APUE and add the /apue/include/apue.h and /apue/lib/error.c 
-+ Edit the /apue/include/apue.h, add the line as follow
++ Edit the /apue/include/apue.h, add the line before the last line as follow :
 
 ```
 #include "error.c"
