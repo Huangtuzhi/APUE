@@ -29,7 +29,7 @@ int main(void)
     {
         pr_ids("child");
         signal(SIGHUP, sig_hup);
-        kill(getpid(), SIGTSTP);
+        kill(getpid(), SIGTSTP);//子进程停止在这里，等待父进程退出。这样内核发出SIGHUP+SIGCONT
         pr_ids("child");
 
         if(read(STDIN_FILENO, &c, 1) != 1)
