@@ -37,3 +37,5 @@ int main(void)
     }
     exit(0);
 }
+
+//在ubuntu14.04中测得孤儿进程的ppid为3242，不是1号进程。它的COMMAND是init --user，而1号进程的COMMAND是/sbin/init。
