@@ -23,7 +23,8 @@ int main(void)
     }
     else if (pid > 0)
     {
-        sleep(5);
+        sleep(10);
+        exit(0);
     }
     else
     {
