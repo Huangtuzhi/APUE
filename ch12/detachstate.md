@@ -1,7 +1,7 @@
 
 在APUE P342讲了线程分离，示例如下：
 
-'''
+```
 #include <pthread.h>
 int makethread(void *(*fn)(void *), void *arg)
 {
@@ -20,14 +20,14 @@ int makethread(void *(*fn)(void *), void *arg)
 	err = pthread_create(&tid, &attr, fn ,arg);
 	return err;
 }
-'''
+```
 
 ----------------------------
 
 ##解释##
 线程分离的作用是什么呢。如下解释：
 
-'''
+```
 int p1;
 void usr()
 {
@@ -65,7 +65,7 @@ int main()
     return 1;
 }
 
-'''
+```
 
  我们看到，在这里task1这个线程函数居然会多次调用其父线程里的函数，
 显然usr函数里，我们无法等待task1结束，反而task1会多次调用 usr，
