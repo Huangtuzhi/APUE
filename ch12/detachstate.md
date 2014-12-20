@@ -37,14 +37,15 @@ void usr()
     if(p1==0)
     {  
         pthread_attr_init(&attr);
-        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);       //因为你的线程不便于等待的关系，设置为分离线程吧   
+        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);       
+        //因为线程不便于等待，设置为分离线程吧
         pthread_create(&pid1, &attr, task1, NULL);
     }
 }
 
 void* task1(void *arg1)
 {
-    p1=1;                           //让子线程不会被多次调用
+    p1=1;      //让子线程不会被多次调用
     int i=0;
     printf("thread1 begin./n");
     for(i=0;i<100;i++)
