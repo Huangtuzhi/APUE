@@ -23,19 +23,29 @@ int already_running(void)
         exit(1);
     }
     if(lockf(fd, F_TLOCK, 0) < 0){
-       // if(errno == EACCES || errno == EAGAIN){
-       //     close(fd);
         syslog(LOG_ERR, "can't lock %s: %s", LOCKFILE, strerror(errno));
-            return 1;
+        exit(1);// a instance running
         }
     ftruncate(fd, 0);//将文件大小置为0
     sprintf(buf, "%ld", (long)getpid());
     write(fd, buf, strlen(buf)+1);
-    return 0;
+    exit(0);
 }
 
 int main()
 {
-    already_running();
-    return 0;
+    pid_t pid;
+    if((pid = fork()) < 0)
+        printf("fork error\n");
+    else if(pid == 0)
+    {
+        printf("child process\n");
+        already_running();
+    }
+    else
+    {
+       already_running();
+       printf("parent process\n");
+    }
+    exit(0);
 }
