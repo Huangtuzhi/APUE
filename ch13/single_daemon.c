@@ -10,7 +10,7 @@
 #define LOCKFILE "/var/run/daemon.pid"
 #define LOCKMODE (S_IRUSR |S_IWUSR |S_IRGRP |S_IROTH)
 
-extern int lockfile(int);
+//extern int lockfile(int);
 
 int already_running(void)
 {
@@ -22,14 +22,12 @@ int already_running(void)
         syslog(LOG_ERR, "can't open %s: %s", LOCKFILE, strerror(errno));
         exit(1);
     }
-    if(lockfile(fd) < 0){
-        if(errno == EACCES || errno == EAGAIN){
-            close(fd);
+    if(lockf(fd, F_TLOCK, 0) < 0){
+       // if(errno == EACCES || errno == EAGAIN){
+       //     close(fd);
+        syslog(LOG_ERR, "can't lock %s: %s", LOCKFILE, strerror(errno));
             return 1;
         }
-        syslog(LOG_ERR, "can't lock %s: %s", LOCKFILE, strerror(errno));
-        exit(1);
-    }
     ftruncate(fd, 0);//将文件大小置为0
     sprintf(buf, "%ld", (long)getpid());
     write(fd, buf, strlen(buf)+1);
