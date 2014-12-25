@@ -10,7 +10,6 @@
 #define LOCKFILE "/var/run/daemon.pid"
 #define LOCKMODE (S_IRUSR |S_IWUSR |S_IRGRP |S_IROTH)
 
-//extern int lockfile(int);
 
 int already_running(void)
 {
